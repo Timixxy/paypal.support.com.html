@@ -1,0 +1,102 @@
+<h2>Quick Account Tools</h2>
+      <ul>
+        <li><a href="#">Reset Password</a></li>
+        <li><a href="#">Verify Email</a></li>
+        <li><a href="#">Link Bank or Card</a></li>
+        <li><a href="#">View Transaction History</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 PayPal. All rights reserved.</p>
+    <p>
+      <a href="#">Privacy</a> | 
+      <a href="#">Legal</a> | 
+      <a href="#">Contact</a>
+    </p>
+  </footer>
+
+  <!-- Chat Widget -->
+  <button class="chat-toggle">💬</button>
+  <div class="chat-widget" id="chatWidget">
+    <div class="chat-header">Live Support</div>
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-input">
+      <input type="text" id="chatInput" placeholder="Type a message...">
+      <button id="sendBtn">Send</button>
+    </div>
+  </div>
+
+  <script>
+    // FAQ accordion
+    document.querySelectorAll('.faq-header').forEach(header => {
+      header.addEventListener('click', () => {
+        header.parentElement.classList.toggle('active');
+      });
+    });
+
+    // Tabs
+    const tabButtons = document.querySelectorAll('.tab-buttons button');
+    const tabContents = document.querySelectorAll('.tab-content');
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        tabContents.forEach(tc => tc.classList.remove('active'));
+        document.getElementById(btn.dataset.tab).classList.add('active');
+      });
+    });
+
+    // Live Chat
+    const chatToggle = document.querySelector('.chat-toggle');
+    const chatWidget = document.getElementById('chatWidget');
+    const chatMessages = document.getElementById('chatMessages');
+    const chatInput = document.getElementById('chatInput');
+    const sendBtn = document.getElementById('sendBtn');
+
+    chatToggle.addEventListener('click', () => {
+      chatWidget.style.display = chatWidget.style.display === 'flex' ? 'none' : 'flex';
+    });
+
+    sendBtn.addEventListener('click', sendMessage);
+    chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendMessage(); });
+
+    function sendMessage() {
+      const msg = chatInput.value.trim();
+      if (!msg) return;
+      const userMsg = document.createElement('div');
+      userMsg.textContent = "You: " + msg;
+      chatMessages.appendChild(userMsg);
+      chatInput.value = "";
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+      setTimeout(() => {
+        const botMsg = document.createElement('div');
+        botMsg.textContent = "Support: Thank you for your message, we’ll assist you shortly.";
+        chatMessages.appendChild(botMsg);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }, 1000);
+    }
+
+    // Search filter
+    document.getElementById('searchBox').addEventListener('input', function() {
+      const query = this.value.toLowerCase();
+      document.querySelectorAll('.faq').forEach(faq => {
+        faq.style.display = faq.textContent.toLowerCase().includes(query) ? 'block' : 'none';
+      });
+    });
+  </script>
+</body>
+<!-- Smartsupp Live Chat script -->
+<script type="text/javascript">
+var _smartsupp = _smartsupp || {};
+_smartsupp.key = '9976649a2312cc727b3c3d4177f3fe0959615b07';
+window.smartsupp||(function(d) {
+ var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
+ s=d.getElementsByTagName('script')[0];c=d.createElement('script');
+ c.type='text/javascript';c.charset='utf-8';c.async=true;
+ c.src='https://www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
+})(document);
+</script>
+</html>
